@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../lib/api';
 import { Loader2, Download } from 'lucide-react';
 import FileDropZone from './FileDropZone';
 import FileList from './FileList';
@@ -26,7 +26,7 @@ export default function ConvertTab({ addToast }) {
     files.forEach((f) => formData.append('files', f));
 
     try {
-      const res = await axios.post('/api/convert', formData, {
+      const res = await api.post('/api/convert', formData, {
         responseType: 'blob',
       });
 

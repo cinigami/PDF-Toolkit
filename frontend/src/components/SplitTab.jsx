@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../lib/api';
 import { Loader2, Download, Scissors, FileText } from 'lucide-react';
 import FileDropZone from './FileDropZone';
 
@@ -27,7 +27,7 @@ export default function SplitTab({ addToast }) {
     const formData = new FormData();
     formData.append('file', f);
     try {
-      const res = await axios.post('/api/split/info', formData);
+      const res = await api.post('/api/split/info', formData);
       setPdfInfo(res.data);
       setRangeEnd(res.data.page_count);
     } catch {
@@ -51,7 +51,7 @@ export default function SplitTab({ addToast }) {
     }
 
     try {
-      const res = await axios.post('/api/split', formData, {
+      const res = await api.post('/api/split', formData, {
         responseType: 'blob',
       });
 

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import axios from 'axios';
+import api from '../lib/api';
 import { Loader2, Download, GripVertical, X, FileText } from 'lucide-react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import FileDropZone from './FileDropZone';
@@ -37,7 +37,7 @@ export default function MergeTab({ addToast }) {
     formData.append('order', files.map((_, i) => i).join(','));
 
     try {
-      const res = await axios.post('/api/merge', formData, {
+      const res = await api.post('/api/merge', formData, {
         responseType: 'blob',
       });
 

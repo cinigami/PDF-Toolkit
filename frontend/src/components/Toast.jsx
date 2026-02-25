@@ -3,7 +3,7 @@ import { X, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function Toast({ toasts, removeToast }) {
   return (
-    <div className="fixed top-4 right-4 z-50 flex flex-col gap-2">
+    <div className="fixed top-4 left-3 right-3 sm:left-auto sm:right-4 z-50 flex flex-col gap-2">
       {toasts.map((toast) => (
         <ToastItem key={toast.id} toast={toast} onClose={() => removeToast(toast.id)} />
       ))}
@@ -21,7 +21,7 @@ function ToastItem({ toast, onClose }) {
 
   return (
     <div
-      className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] max-w-[420px] animate-[slideIn_0.2s_ease-out] ${
+      className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg sm:min-w-[300px] sm:max-w-[420px] animate-[slideIn_0.2s_ease-out] ${
         isError
           ? 'bg-red-600 text-white'
           : 'bg-emerald-600 text-white'

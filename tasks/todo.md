@@ -34,41 +34,38 @@
 ## Phase 6: Polish & Docs
 - [x] Error handling: file type validation (FE+BE), max 50MB, corrupted file handling
 - [x] Progress indicators during processing
-- [x] Mobile responsive (Tailwind responsive utilities built-in)
 - [x] `README.md` — Description, install steps, API docs, tech stack
 - [x] `docker-compose.yml` — Optional Docker setup
 
 ---
 
-## Review
+## Phase 7: Mobile Responsiveness
 
-### What was built
-A complete full-stack PDF Toolkit with React frontend and Python FastAPI backend.
+### Issues Found
+- Header: logo + tabs + toggle crammed in one row — breaks on phones
+- FileDropZone: `p-10` padding excessive on small screens
+- Main content: `py-8` wastes vertical space on mobile
+- Toast: fixed `min-w-[300px]` at `right-4` overflows narrow screens
+- No responsive breakpoints (`sm:`, `md:`) used anywhere
 
-### Backend (7 files)
-- **main.py** — FastAPI app with CORS, lifespan-based cleanup task, health endpoint
-- **routers/convert.py** — Accepts multi-file upload, converts each to PDF, returns single PDF or ZIP
-- **routers/split.py** — Accepts PDF + split mode (all/specific/range), returns split files or ZIP
-- **routers/merge.py** — Accepts multiple PDFs + optional order, returns merged PDF
-- **services/converter.py** — Conversion logic for 15 file types using reportlab, python-docx, openpyxl, python-pptx, Pillow, markdown
-- **services/splitter.py** — PDF splitting using pypdf (individual pages, specific pages, page range)
-- **services/merger.py** — PDF merging using pypdf
-- **utils/file_cleanup.py** — Temp directory management with 10-minute auto-cleanup
+### Checklist
+- [x] **Header.jsx** — Stack logo above nav on small screens, reduce tab padding
+- [x] **App.jsx** — Reduce main area padding on mobile (`py-4 sm:py-8`)
+- [x] **FileDropZone.jsx** — Reduce padding (`p-6 sm:p-10`), smaller icon on mobile
+- [x] **Toast.jsx** — Full-width toasts on mobile, position at top-center
+- [x] **FileList.jsx** — Reduce padding on mobile for file items
+- [x] **MergeTab.jsx** — Reduce file item padding on mobile
+- [x] **SplitTab.jsx** — Minor spacing tweaks for small screens
 
-### Frontend (8 files)
-- **App.jsx** — Tab routing, dark mode state (persisted to localStorage), toast management
-- **Header.jsx** — Logo, tab navigation, dark/light mode toggle
-- **FileDropZone.jsx** — Drag-and-drop file upload with visual feedback
-- **FileList.jsx** — File listing with size display and remove buttons
-- **ConvertTab.jsx** — Multi-file convert with download (individual PDF or ZIP)
-- **SplitTab.jsx** — PDF upload, page count display, 3 split modes, download
-- **MergeTab.jsx** — Multi-PDF upload with drag-to-reorder (using @hello-pangea/dnd), merge + download
-- **Toast.jsx** — Auto-dismissing toast notifications (success/error)
+## Review — Mobile Responsiveness
 
-### Key decisions
-- Used `@hello-pangea/dnd` instead of `react-beautiful-dnd` (React 19 compatibility)
-- Used Tailwind CSS v4 with `@tailwindcss/vite` plugin
-- Used CSS custom properties for dark mode colors (works with Tailwind v4)
-- Vite dev server proxies `/api` to backend at port 8000
-- Reportlab used for all PDF generation (no external tool dependencies like wkhtmltopdf)
-- Backend cleanup runs as an async background task every 60 seconds
+### What changed
+All changes use Tailwind `sm:` breakpoint (640px). Desktop appearance is unchanged.
+
+- **Header.jsx** — Layout switches to `flex-col` on mobile: logo + dark mode toggle on top row, tab nav centered below. Dark mode button is duplicated (one for mobile, one for desktop via `sm:hidden`/`hidden sm:block`). Tab button padding reduced on mobile (`px-3 sm:px-4`).
+- **App.jsx** — Main content padding: `px-3 sm:px-4 py-4 sm:py-8` (tighter on mobile).
+- **FileDropZone.jsx** — Drop zone padding: `p-6 sm:p-10`. Upload icon: 32px on mobile, 40px on desktop. Label text: `text-base sm:text-lg`.
+- **Toast.jsx** — Toasts span full width on mobile (`left-3 right-3`), pinned to right on desktop. Removed `min-w`/`max-w` constraints on mobile.
+- **FileList.jsx** — File items: `gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3`.
+- **MergeTab.jsx** — Same padding reduction as FileList for drag-drop items.
+- **SplitTab.jsx** — File info bar: same padding reduction pattern.

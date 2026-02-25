@@ -24,7 +24,7 @@ export default function FileDropZone({ onFiles, accept, multiple = true, label }
       onDragLeave={() => setDragOver(false)}
       onDrop={handleDrop}
       onClick={() => inputRef.current?.click()}
-      className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-all ${
+      className={`border-2 border-dashed rounded-xl p-6 sm:p-10 text-center cursor-pointer transition-all ${
         dragOver ? 'drop-active' : ''
       }`}
       style={{ borderColor: dragOver ? undefined : 'var(--border)', backgroundColor: 'var(--bg-secondary)' }}
@@ -37,8 +37,9 @@ export default function FileDropZone({ onFiles, accept, multiple = true, label }
         onChange={handleChange}
         className="hidden"
       />
-      <Upload size={40} className="mx-auto mb-3 text-primary-400" />
-      <p className="text-lg font-medium">{label || 'Drop files here or click to browse'}</p>
+      <Upload size={32} className="mx-auto mb-3 text-primary-400 sm:hidden" />
+      <Upload size={40} className="mx-auto mb-3 text-primary-400 hidden sm:block" />
+      <p className="text-base sm:text-lg font-medium">{label || 'Drop files here or click to browse'}</p>
       <p className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
         {accept ? `Accepted: ${accept}` : 'All supported file types'}
       </p>

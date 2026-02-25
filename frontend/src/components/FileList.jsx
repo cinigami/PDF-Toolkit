@@ -14,7 +14,7 @@ export default function FileList({ files, onRemove, draggable = false }) {
       {files.map((file, index) => (
         <div
           key={`${file.name}-${index}`}
-          className="flex items-center gap-3 px-4 py-3 rounded-lg border"
+          className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border"
           style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-secondary)' }}
         >
           {draggable && (

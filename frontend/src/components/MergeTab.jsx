@@ -101,7 +101,7 @@ export default function MergeTab({ addToast }) {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-lg border transition-shadow ${
+                        className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border transition-shadow ${
                           snapshot.isDragging ? 'shadow-lg' : ''
                         }`}
                         style={{

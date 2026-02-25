@@ -41,7 +41,7 @@ export default function App() {
         setDarkMode={setDarkMode}
       />
 
-      <main className="max-w-3xl mx-auto px-4 py-8">
+      <main className="max-w-3xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {activeTab === 'convert' && <ConvertTab addToast={addToast} />}
         {activeTab === 'split' && <SplitTab addToast={addToast} />}
         {activeTab === 'merge' && <MergeTab addToast={addToast} />}
